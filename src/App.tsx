@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import CurrentDisplay from "./components/CurrentDisplay";
 import UpcomingDisplay from "./components/UpcomingDisplay";
+import HorizontalLoader from "./components/HorizontalLoader";
 
 function App(): JSX.Element {
   return (
@@ -16,6 +17,10 @@ function App(): JSX.Element {
 
       <Box>
         <UpcomingDisplay />
+      </Box>
+
+      <Box>
+        <HorizontalLoader />
       </Box>
     </main>
   );
