@@ -5,7 +5,7 @@ import CurrentDisplay from "./components/CurrentDisplay";
 import UpcomingDisplay from "./components/UpcomingDisplay";
 import HorizontalLoader from "./components/HorizontalLoader";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFetchWeather } from "./hooks/useFetchWeather";
 
 function App(): JSX.Element {
@@ -18,22 +18,22 @@ function App(): JSX.Element {
     setQuery(inputText);
   }
 
-  useEffect(
-    function () {
-      console.log(fetchResult);
-      console.log(error);
-      console.log(isLoading);
-    },
-    [fetchResult, error, isLoading],
-  );
-
   return (
     <main className="mx-auto mt-12 max-w-2xl space-y-6 font-sans text-slate-950">
       <Box>
         <Header>
           <SearchForm handleUpdateQuery={handleUpdateQuery} />
         </Header>
-        <CurrentDisplay />
+        {fetchResult && (
+          <CurrentDisplay
+            location={{
+              name: fetchResult.name,
+              country_code: fetchResult.country_code,
+            }}
+            currentData={fetchResult.current}
+            currentUnits={fetchResult.current_units}
+          />
+        )}
       </Box>
 
       {fetchResult && (

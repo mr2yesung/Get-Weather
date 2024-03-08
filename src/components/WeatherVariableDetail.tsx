@@ -1,8 +1,21 @@
-function WeatherVariableDetail(): JSX.Element {
+type WeatherVariableDetailProps = {
+  title: string;
+  value: number;
+  unit: string;
+};
+
+function WeatherVariableDetail({
+  title,
+  value,
+  unit,
+}: WeatherVariableDetailProps): JSX.Element {
   return (
     <div className="flex flex-col items-center gap-y-1">
-      <p>Temp</p>
-      <p className="font-semibold">25oC</p>
+      <p>{title}</p>
+      <p className="font-semibold">
+        {value}
+        {unit}
+      </p>
     </div>
   );
 }
