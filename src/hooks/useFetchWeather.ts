@@ -104,4 +104,4 @@ type dailyWeatherData<T> = {
 
 type fetchResultData = locationDisplayData & weatherData;
 
-export { useFetchWeather };
+export { useFetchWeather, type dailyWeatherData };

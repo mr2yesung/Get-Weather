@@ -36,13 +36,16 @@ function App(): JSX.Element {
         <CurrentDisplay />
       </Box>
 
-      <Box>
-        <UpcomingDisplay />
-      </Box>
-
-      <Box>
-        <HorizontalLoader />
-      </Box>
+      {fetchResult && (
+        <Box>
+          {isLoading && <HorizontalLoader />}
+          <UpcomingDisplay
+            dailyData={fetchResult.daily}
+            dailyUnits={fetchResult.daily_units}
+            isVisible={!isLoading && !error}
+          />
+        </Box>
+      )}
     </main>
   );
 }
