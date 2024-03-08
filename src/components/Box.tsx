@@ -4,7 +4,7 @@ type BoxProps = {
 
 function Box({ children }: BoxProps): JSX.Element {
   return (
-    <div className="mx-auto max-w-96 rounded-lg border shadow-sm">
+    <div className="relative mx-auto max-w-96 rounded-lg border shadow-sm">
       {children}
     </div>
   );
