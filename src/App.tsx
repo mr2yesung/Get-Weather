@@ -26,12 +26,12 @@ function App(): JSX.Element {
         </Header>
         {fetchResult && (
           <CurrentDisplay
-            location={{
+            locationData={{
               name: fetchResult.name,
               country_code: fetchResult.country_code,
             }}
-            currentData={fetchResult.current}
-            currentUnits={fetchResult.current_units}
+            currentWeatherData={fetchResult.current}
+            currentWeatherUnits={fetchResult.current_units}
           />
         )}
       </Box>
@@ -40,8 +40,8 @@ function App(): JSX.Element {
         <Box>
           {isLoading && <HorizontalLoader />}
           <UpcomingDisplay
-            dailyData={fetchResult.daily}
-            dailyUnits={fetchResult.daily_units}
+            dailyWeatherData={fetchResult.daily}
+            dailyWeatherUnits={fetchResult.daily_units}
             isVisible={!isLoading && !error}
           />
         </Box>

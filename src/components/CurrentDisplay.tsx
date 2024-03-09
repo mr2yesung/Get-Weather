@@ -7,33 +7,33 @@ import {
 } from "../hooks/useFetchWeather";
 
 type CurrentDisplayProps = {
-  location: locationDisplayData;
-  currentData: currentWeatherData<number> & { weathercode: number };
-  currentUnits: currentWeatherData<string>;
+  locationData: locationDisplayData;
+  currentWeatherData: currentWeatherData<number> & { weathercode: number };
+  currentWeatherUnits: currentWeatherData<string>;
 };
 
 function CurrentDisplay({
-  location,
-  currentData,
-  currentUnits,
+  locationData,
+  currentWeatherData,
+  currentWeatherUnits,
 }: CurrentDisplayProps): JSX.Element {
   const weatherDescription: string =
-    getWeatherDescription(currentData.weathercode) ||
-    "Weather Code " + currentData.weathercode;
+    getWeatherDescription(currentWeatherData.weathercode) ||
+    "Weather Code " + currentWeatherData.weathercode;
 
   return (
     <div className="flex flex-col items-center gap-y-4 pb-6">
       <div className="flex flex-col items-center gap-y-2 pb-3">
         <h2 className="text-4xl font-semibold tracking-tighter">
-          {location.name}{" "}
-          <span className="text-3xl">{location.country_code}</span>
+          {locationData.name}{" "}
+          <span className="text-3xl">{locationData.country_code}</span>
         </h2>
         <p className="text-center">{`${weatherDescription}`}</p>
       </div>
       <CurrentDetail
         weatherDescription={weatherDescription}
-        currentUnits={currentUnits}
-        currentData={currentData}
+        currentWeatherUnits={currentWeatherUnits}
+        currentWeatherData={currentWeatherData}
       />
     </div>
   );

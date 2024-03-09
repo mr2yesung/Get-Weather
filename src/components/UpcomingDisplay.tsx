@@ -3,31 +3,31 @@ import { getDayName } from "../utilities/getDayName";
 import UpcomingDayDetail from "./UpcomingDayDetail";
 
 type UpcomingDisplayProps = {
-  dailyData: {
+  dailyWeatherData: {
     time: string[];
     weathercode: number[];
   } & dailyWeatherData<number[]>;
-  dailyUnits: dailyWeatherData<string>;
+  dailyWeatherUnits: dailyWeatherData<string>;
   isVisible: boolean;
 };
 
 function UpcomingDisplay({
-  dailyData,
-  dailyUnits,
+  dailyWeatherData,
+  dailyWeatherUnits,
   isVisible,
 }: UpcomingDisplayProps): JSX.Element {
   return (
     <table className="relative w-full caption-bottom overflow-auto">
       <tbody className={`text-sm ${isVisible ? "visible" : "invisible"}`}>
-        {dailyData.time.map((day, i) => (
+        {dailyWeatherData.time.map((day, i) => (
           <UpcomingDayDetail
             key={`dailyData-${day}`}
             dayName={getDayName(day)}
-            units={dailyUnits}
-            data={{
-              weatherCode: dailyData.weathercode[i],
-              maxTemp: dailyData.temperature_2m_max[i],
-              minTemp: dailyData.temperature_2m_min[i],
+            dailyWeatherUnits={dailyWeatherUnits}
+            dayWeatherData={{
+              weatherCode: dailyWeatherData.weathercode[i],
+              maxTemp: dailyWeatherData.temperature_2m_max[i],
+              minTemp: dailyWeatherData.temperature_2m_min[i],
             }}
           />
         ))}

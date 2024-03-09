@@ -3,14 +3,14 @@ import { getWeatherDescription } from "../utilities/translateWeatherCode";
 
 type UpcomingDayDetailProps = {
   dayName: string;
-  units: dailyWeatherData<string>;
-  data: { weatherCode: number; maxTemp: number; minTemp: number };
+  dailyWeatherUnits: dailyWeatherData<string>;
+  dayWeatherData: { weatherCode: number; maxTemp: number; minTemp: number };
 };
 
 function UpcomingDayDetail({
   dayName,
-  units,
-  data,
+  dailyWeatherUnits,
+  dayWeatherData,
 }: UpcomingDayDetailProps): JSX.Element {
   return (
     <tr className="flex justify-between border-b p-4 transition-colors hover:bg-slate-50">
@@ -18,15 +18,17 @@ function UpcomingDayDetail({
       <td className="text-xs">
         Max{" "}
         <span className="font-semibold">
-          {data.maxTemp}
-          {units.temperature_2m_max}
+          {dayWeatherData.maxTemp}
+          {dailyWeatherUnits.temperature_2m_max}
         </span>
         , Min{" "}
         <span className="font-semibold">
-          {data.minTemp}
-          {units.temperature_2m_min}
+          {dayWeatherData.minTemp}
+          {dailyWeatherUnits.temperature_2m_min}
         </span>
-        , {getWeatherDescription(data.weatherCode) || "Invalid weather code"}
+        ,{" "}
+        {getWeatherDescription(dayWeatherData.weatherCode) ||
+          "Invalid weather code"}
       </td>
     </tr>
   );

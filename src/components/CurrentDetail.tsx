@@ -5,14 +5,14 @@ import { currentWeatherData } from "../hooks/useFetchWeather";
 
 type CurrentDetailProps = {
   weatherDescription: string;
-  currentUnits: currentWeatherData<string>;
-  currentData: currentWeatherData<number> & { weathercode: number };
+  currentWeatherUnits: currentWeatherData<string>;
+  currentWeatherData: currentWeatherData<number> & { weathercode: number };
 };
 
 function CurrentDetail({
   weatherDescription,
-  currentUnits,
-  currentData,
+  currentWeatherUnits,
+  currentWeatherData,
 }: CurrentDetailProps): JSX.Element {
   return (
     <div className="flex items-center gap-x-6">
@@ -20,24 +20,24 @@ function CurrentDetail({
         width="100"
         height="100"
         className="overflow-hidden rounded-full"
-        src={`/${getWeatherImageName(currentData.weathercode) || "Block"}.svg`}
+        src={`/${getWeatherImageName(currentWeatherData.weathercode) || "Block"}.svg`}
         alt={weatherDescription}
       />
       <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-center">
         <WeatherVariableDetail
           title="Temp"
-          value={currentData.temperature_2m}
-          unit={currentUnits.temperature_2m}
+          value={currentWeatherData.temperature_2m}
+          unit={currentWeatherUnits.temperature_2m}
         />
         <WeatherVariableDetail
           title="Wind"
-          value={currentData.wind_speed_10m}
-          unit={currentUnits.wind_speed_10m}
+          value={currentWeatherData.wind_speed_10m}
+          unit={currentWeatherUnits.wind_speed_10m}
         />
         <WeatherVariableDetail
           title="Humidity"
-          value={currentData.relative_humidity_2m}
-          unit={currentUnits.relative_humidity_2m}
+          value={currentWeatherData.relative_humidity_2m}
+          unit={currentWeatherUnits.relative_humidity_2m}
         />
       </div>
     </div>
