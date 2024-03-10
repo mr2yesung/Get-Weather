@@ -50,5 +50,3 @@ function getWeatherImageName(weatherCode: number): weatherSVGName | undefined {
 }
 
 export { getWeatherDescription, getWeatherImageName };
-
-// https://fonts.google.com/icons?icon.query=weather

@@ -58,6 +58,3 @@ function CurrentDisplay({
 }
 
 export default CurrentDisplay;
-
-// favicon https://fonts.google.com/icons?selected=Material+Symbols+Outlined:thermostat:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=forecast
-// https://fonts.google.com/icons?icon.query=weather
