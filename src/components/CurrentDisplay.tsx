@@ -12,19 +12,23 @@ type CurrentDisplayProps = {
   locationData: locationResultData;
   currentWeatherData: currentResultUnitData[];
   currentWeatherCode: number;
+  isVisible: boolean;
 };
 
 function CurrentDisplay({
   locationData,
   currentWeatherData,
   currentWeatherCode,
+  isVisible,
 }: CurrentDisplayProps): JSX.Element {
   const weatherDescription: string =
     getWeatherDescription(currentWeatherCode) ||
     "Weather Code " + currentWeatherCode;
 
   return (
-    <div className="flex flex-col items-center gap-y-4 pb-6">
+    <div
+      className={`flex flex-col items-center gap-y-4 pb-6 ${isVisible ? "visible" : "invisible"}`}
+    >
       <div className="flex flex-col items-center gap-y-2 pb-3 lg:gap-y-4 lg:pb-6 xl:gap-y-2 xl:pb-3">
         <h2 className="text-4xl font-semibold tracking-tighter md:text-5xl xl:text-4xl">
           {locationData.name}{" "}

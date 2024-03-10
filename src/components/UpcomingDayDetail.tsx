@@ -16,10 +16,8 @@ function UpcomingDayDetail({
 }: UpcomingDayDetailProps): JSX.Element {
   return (
     <tr className="flex justify-between border-b p-4 transition-colors hover:bg-slate-50 lg:p-8 xl:p-4">
-      <td className="font-semibold md:text-lg lg:text-xl xl:text-base">
-        {getDayName(dayWeatherDatum.time)}
-      </td>
-      <td className="text-xs md:text-base lg:text-lg xl:text-sm">
+      <td className="font-semibold">{getDayName(dayWeatherDatum.time)}</td>
+      <td className="text-nowrap text-xs md:text-base lg:text-lg xl:text-sm">
         Max{" "}
         <span className="font-semibold">
           {dayWeatherDatum.maxTemp}

@@ -18,7 +18,9 @@ function UpcomingDisplay({
 }: UpcomingDisplayProps): JSX.Element {
   return (
     <table className="relative w-full caption-bottom overflow-auto">
-      <tbody className={`text-sm ${isVisible ? "visible" : "invisible"}`}>
+      <tbody
+        className={`text-sm md:text-lg lg:text-xl xl:text-base ${isVisible ? "visible" : "invisible"}`}
+      >
         {dailyWeatherData.map((dayWeatherDatum) => (
           <UpcomingDayDetail
             key={`dailyData-${dayWeatherDatum.time}`}
