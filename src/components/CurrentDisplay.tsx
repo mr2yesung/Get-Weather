@@ -25,22 +25,22 @@ function CurrentDisplay({
 
   return (
     <div className="flex flex-col items-center gap-y-4 pb-6">
-      <div className="flex flex-col items-center gap-y-2 pb-3">
-        <h2 className="text-4xl font-semibold tracking-tighter">
+      <div className="flex flex-col items-center gap-y-2 pb-3 lg:gap-y-4 lg:pb-6 xl:gap-y-2 xl:pb-3">
+        <h2 className="text-4xl font-semibold tracking-tighter md:text-5xl xl:text-4xl">
           {locationData.name}{" "}
-          <span className="text-3xl">{locationData.country_code}</span>
+          <span className="text-3xl md:text-4xl xl:text-2xl">
+            {locationData.country_code}
+          </span>
         </h2>
-        <p className="text-center">{`${weatherDescription}`}</p>
+        <p className="text-center md:text-xl lg:text-2xl xl:text-lg">{`${weatherDescription}`}</p>
       </div>
-      <div className="flex items-center gap-x-6">
+      <div className="flex items-center gap-x-6 md:gap-x-9 lg:gap-x-20 xl:gap-x-9">
         <img
-          width="100"
-          height="100"
-          className="overflow-hidden rounded-full"
+          className="h-[100px] w-[100px] overflow-hidden rounded-full md:h-[120px] md:w-[120px] lg:h-[140px] lg:w-[140px] xl:h-[100px] xl:w-[100px]"
           src={`/weather_icons/${getWeatherImageName(currentWeatherCode) || "Block"}.svg`}
           alt={weatherDescription}
         />
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-center">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-center md:gap-x-5 lg:gap-x-10 xl:gap-x-4">
           {currentWeatherData.map((currentWeatherDatum) => (
             <WeatherVariableDetail
               key={`currentData-${currentWeatherDatum.title}`}

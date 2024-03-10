@@ -8,7 +8,7 @@ function WeatherVariableDetail({
   currentWeatherDatum,
 }: WeatherVariableDetailProps): JSX.Element {
   return (
-    <div className="flex flex-col items-center gap-y-1">
+    <div className="flex flex-col items-center gap-y-1 md:text-lg lg:text-xl xl:text-base">
       <p className="capitalize">{currentWeatherDatum.title}</p>
       <p className="font-semibold tracking-wider">
         {currentWeatherDatum.value}

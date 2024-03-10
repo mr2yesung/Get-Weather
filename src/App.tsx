@@ -19,7 +19,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <main className="mx-auto mt-12 max-w-2xl space-y-6 font-sans text-slate-950">
+    <main className="flex min-h-screen w-screen flex-col items-center justify-center gap-y-6 py-3 font-sans text-slate-950 md:gap-y-8 xl:gap-y-6">
       <Box>
         <Header>
           <SearchForm handleUpdateQuery={handleUpdateQuery} />
