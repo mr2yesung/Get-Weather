@@ -1,20 +1,18 @@
+import { currentResultUnitData } from "../hooks/useFetchWeather";
+
 type WeatherVariableDetailProps = {
-  title: string;
-  value: number;
-  unit: string;
+  currentWeatherDatum: currentResultUnitData;
 };
 
 function WeatherVariableDetail({
-  title,
-  value,
-  unit,
+  currentWeatherDatum,
 }: WeatherVariableDetailProps): JSX.Element {
   return (
     <div className="flex flex-col items-center gap-y-1">
-      <p>{title}</p>
-      <p className="font-semibold">
-        {value}
-        {unit}
+      <p className="capitalize">{currentWeatherDatum.title}</p>
+      <p className="font-semibold tracking-wider">
+        {currentWeatherDatum.value}
+        {currentWeatherDatum.unit}
       </p>
     </div>
   );

@@ -1,25 +1,27 @@
-import CurrentDetail from "./CurrentDetail";
-
-import { getWeatherDescription } from "../utilities/translateWeatherCode";
 import {
-  currentWeatherData,
-  locationDisplayData,
+  getWeatherDescription,
+  getWeatherImageName,
+} from "../utilities/translateWeatherCode";
+import {
+  currentResultUnitData,
+  locationResultData,
 } from "../hooks/useFetchWeather";
+import WeatherVariableDetail from "./WeatherVariableDetail";
 
 type CurrentDisplayProps = {
-  locationData: locationDisplayData;
-  currentWeatherData: currentWeatherData<number> & { weathercode: number };
-  currentWeatherUnits: currentWeatherData<string>;
+  locationData: locationResultData;
+  currentWeatherData: currentResultUnitData[];
+  currentWeatherCode: number;
 };
 
 function CurrentDisplay({
   locationData,
   currentWeatherData,
-  currentWeatherUnits,
+  currentWeatherCode,
 }: CurrentDisplayProps): JSX.Element {
   const weatherDescription: string =
-    getWeatherDescription(currentWeatherData.weathercode) ||
-    "Weather Code " + currentWeatherData.weathercode;
+    getWeatherDescription(currentWeatherCode) ||
+    "Weather Code " + currentWeatherCode;
 
   return (
     <div className="flex flex-col items-center gap-y-4 pb-6">
@@ -30,11 +32,23 @@ function CurrentDisplay({
         </h2>
         <p className="text-center">{`${weatherDescription}`}</p>
       </div>
-      <CurrentDetail
-        weatherDescription={weatherDescription}
-        currentWeatherUnits={currentWeatherUnits}
-        currentWeatherData={currentWeatherData}
-      />
+      <div className="flex items-center gap-x-6">
+        <img
+          width="100"
+          height="100"
+          className="overflow-hidden rounded-full"
+          src={`/${getWeatherImageName(currentWeatherCode) || "Block"}.svg`}
+          alt={weatherDescription}
+        />
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-center">
+          {currentWeatherData.map((currentWeatherDatum) => (
+            <WeatherVariableDetail
+              key={`currentData-${currentWeatherDatum.title}`}
+              currentWeatherDatum={currentWeatherDatum}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

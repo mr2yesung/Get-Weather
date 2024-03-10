@@ -41,11 +41,48 @@ function useFetchWeather(searchQuery: string): {
 
           const weatherData: weatherData = await weatherResponse.json();
 
-          // update fetch result
-          setFetchResult({
+          // process data
+          const locationResult: locationResultData = {
             name: name,
             country_code: country_code,
-            ...weatherData,
+          };
+
+          const currentResultKeyPairs: {
+            [key: string]: keyof weatherData["current_units"];
+          } = {
+            temp: "temperature_2m",
+            humidity: "relative_humidity_2m",
+            wind: "wind_speed_10m",
+          };
+          const currentResult: fetchResultData["current"] = {
+            weatherCode: weatherData.current.weathercode,
+            data: Object.keys(currentResultKeyPairs).map((key) => {
+              return {
+                title: key,
+                unit: weatherData.current_units[currentResultKeyPairs[key]],
+                value: weatherData.current[currentResultKeyPairs[key]],
+              };
+            }),
+          };
+
+          const dailyWeatherData: weatherData["daily"] = weatherData.daily;
+          const dailyResult: fetchResultData["daily"] = {
+            units: weatherData.daily_units,
+            data: dailyWeatherData.time.map((day, i) => {
+              return {
+                time: day,
+                weatherCode: dailyWeatherData.weathercode[i],
+                maxTemp: dailyWeatherData.temperature_2m_max[i],
+                minTemp: dailyWeatherData.temperature_2m_min[i],
+              };
+            }),
+          };
+
+          // update fetch result
+          setFetchResult({
+            location: locationResult,
+            current: currentResult,
+            daily: dailyResult,
           });
         } catch (err) {
           console.error(err);
@@ -70,43 +107,63 @@ function useFetchWeather(searchQuery: string): {
   return { fetchResult, error, isLoading };
 }
 
-type locationUnitData = locationDisplayData & {
+type locationUnitData = locationResultData & {
   latitude: number;
   longitude: number;
   timezone: string;
 };
 
-type locationDisplayData = {
+type locationResultData = {
   name: string;
   country_code: string;
 };
 
 type weatherData = {
-  current_units: currentWeatherData<string>;
-  current: currentWeatherData<number> & { weathercode: number };
-  daily_units: dailyWeatherData<string>;
+  current_units: currentWeatherDataCategory<string>;
+  current: currentWeatherDataCategory<number> & { weathercode: number };
+  daily_units: dailyWeatherDataCategory<string>;
   daily: {
     time: string[];
     weathercode: number[];
-  } & dailyWeatherData<number[]>;
+  } & dailyWeatherDataCategory<number[]>;
 };
 
-type currentWeatherData<T> = {
+type currentWeatherDataCategory<T> = {
   temperature_2m: T;
   relative_humidity_2m: T;
   wind_speed_10m: T;
 };
 
-type dailyWeatherData<T> = {
+type dailyWeatherDataCategory<T> = {
   temperature_2m_max: T;
   temperature_2m_min: T;
 };
 
-type fetchResultData = locationDisplayData & weatherData;
+type fetchResultData = {
+  location: locationResultData;
+  current: {
+    weatherCode: number;
+    data: currentResultUnitData[];
+  };
+  daily: {
+    units: dailyWeatherDataCategory<string>;
+    data: dailyResultUnitData[];
+  };
+};
+
+type currentResultUnitData = { title: string; unit: string; value: number };
+
+type dailyResultUnitData = {
+  time: string;
+  weatherCode: number;
+  maxTemp: number;
+  minTemp: number;
+};
 
 export {
   useFetchWeather,
-  type locationDisplayData,
-  type dailyWeatherData,
-  type currentWeatherData,
+  type locationResultData,
+  type currentResultUnitData,
+  type dailyResultUnitData,
+  type dailyWeatherDataCategory,
 };

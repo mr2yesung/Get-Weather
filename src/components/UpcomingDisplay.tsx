@@ -1,13 +1,13 @@
-import { dailyWeatherData } from "../hooks/useFetchWeather";
-import { getDayName } from "../utilities/getDayName";
 import UpcomingDayDetail from "./UpcomingDayDetail";
 
+import {
+  dailyResultUnitData,
+  dailyWeatherDataCategory,
+} from "../hooks/useFetchWeather";
+
 type UpcomingDisplayProps = {
-  dailyWeatherData: {
-    time: string[];
-    weathercode: number[];
-  } & dailyWeatherData<number[]>;
-  dailyWeatherUnits: dailyWeatherData<string>;
+  dailyWeatherData: dailyResultUnitData[];
+  dailyWeatherUnits: dailyWeatherDataCategory<string>;
   isVisible: boolean;
 };
 
@@ -19,16 +19,11 @@ function UpcomingDisplay({
   return (
     <table className="relative w-full caption-bottom overflow-auto">
       <tbody className={`text-sm ${isVisible ? "visible" : "invisible"}`}>
-        {dailyWeatherData.time.map((day, i) => (
+        {dailyWeatherData.map((dayWeatherDatum) => (
           <UpcomingDayDetail
-            key={`dailyData-${day}`}
-            dayName={getDayName(day)}
+            key={`dailyData-${dayWeatherDatum.time}`}
+            dayWeatherDatum={dayWeatherDatum}
             dailyWeatherUnits={dailyWeatherUnits}
-            dayWeatherData={{
-              weatherCode: dailyWeatherData.weathercode[i],
-              maxTemp: dailyWeatherData.temperature_2m_max[i],
-              minTemp: dailyWeatherData.temperature_2m_min[i],
-            }}
           />
         ))}
       </tbody>
