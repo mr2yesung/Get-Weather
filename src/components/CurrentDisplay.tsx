@@ -37,7 +37,7 @@ function CurrentDisplay({
           width="100"
           height="100"
           className="overflow-hidden rounded-full"
-          src={`/${getWeatherImageName(currentWeatherCode) || "Block"}.svg`}
+          src={`/weather_icons/${getWeatherImageName(currentWeatherCode) || "Block"}.svg`}
           alt={weatherDescription}
         />
         <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-center">
@@ -54,3 +54,6 @@ function CurrentDisplay({
 }
 
 export default CurrentDisplay;
+
+// favicon https://fonts.google.com/icons?selected=Material+Symbols+Outlined:thermostat:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=forecast
+// https://fonts.google.com/icons?icon.query=weather
