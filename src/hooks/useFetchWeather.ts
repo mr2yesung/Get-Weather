@@ -21,6 +21,7 @@ function useFetchWeather(searchQuery: string): {
           // fetch location
           const locationResponse: Response = await fetch(
             `https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}`,
+            { signal: controller.signal },
           );
           if (!locationResponse.ok)
             throw new Error(`Fetch response error: ${locationResponse.status}`);
